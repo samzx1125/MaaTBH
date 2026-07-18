@@ -17,11 +17,11 @@
     // "mirrorchyan_rid": "MaaXXX",
     // "mirrorchyan_multiplatform": true,
     "controller": [
-        {
-            "name": "安卓端",
-            "type": "Adb",
-            "display_short_side": 720 // 默认缩放分辨率的短边长度
-        },
+    //    {
+    //        "name": "安卓端",
+    //        "type": "Adb",
+    //        "display_short_side": 720 // 默认缩放分辨率的短边长度
+    //    },
         {
             "name": "桌面端",
             "type": "Win32",
@@ -43,13 +43,13 @@
                 "./resource"
             ]
         },
-        {
-            "name": "B 服",
-            "path": [
-                "./resource"
+   //     {
+   //         "name": "B 服",
+   //         "path": [
+   //             "./resource"
                 // "./resource_bilibili"
-            ]
-        }
+   //         ]
+   //     }
     ],
     // 可选的 agent 示例
     // "agent": {
@@ -60,27 +60,18 @@
     // },
     "task": [
         {
-            "name": "普通任务",
-            "entry": "MyTask1"
-        },
-        {
-            "name": "选项任务",
-            "entry": "MyTask2",
+            "name": "合成",
+            "entry": "Synthesis",
             "option": [
                 "任务选项1"
             ]
         },
         {
-            "name": "参数任务",
-            "entry": "MyTask3",
+            "name": "收取盒子",
+            "entry": "CollectChest",
             "option": [
                 "任务选项1"
-            ],
-            "pipeline_override": {}
-        },
-        {
-            "name": "带Custom的任务",
-            "entry": "MyTask4"
+            ]
         }
     ],
     "option": {
