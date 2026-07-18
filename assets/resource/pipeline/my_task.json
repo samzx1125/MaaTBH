@@ -1,7 +1,6 @@
 {
-    "MyTask1": {},
-    "MyTask2": {},
-    "MyTask3": {},
+    "Synthesis": {},
+    "CollectChest": {},
     "MyTask4": {
         "recognition": "Custom",
         "custom_recognition": "my_reco_222",
