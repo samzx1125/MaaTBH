@@ -131,10 +131,6 @@
         "post_wait_freezes": 300,
         "next": [
             "Synthesis-Equipment-CraftLoop"
-        ],
-        "timeout": 5000,
-        "on_error": [
-            "Synthesis-Equipment-CraftLoop"
         ]
     },
     "Synthesis-Equipment-Exhausted": {
@@ -247,10 +243,6 @@
         "post_wait_freezes": 300,
         "next": [
             "Synthesis-Material-CraftLoop"
-        ],
-        "timeout": 5000,
-        "on_error": [
-            "Synthesis-Material-CraftLoop"
         ]
     },
     "Synthesis-Material-Exhausted": {
@@ -362,10 +354,6 @@
         "action": "Click",
         "post_wait_freezes": 300,
         "next": [
-            "Synthesis-Accessory-CraftLoop"
-        ],
-        "timeout": 5000,
-        "on_error": [
             "Synthesis-Accessory-CraftLoop"
         ]
     },
