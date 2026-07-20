@@ -13,11 +13,6 @@
     "github": "https://github.com/samzx1125/MaaTBH",
     "version": "0.0.1",
     "controller": [
-        //    {
-        //        "name": "安卓端",
-        //        "type": "Adb",
-        //        "display_short_side": 720 // 預設縮放解析度的短邊長度
-        //    },
         {
             "name": "桌面端",
             "type": "Win32",
@@ -27,8 +22,8 @@
                 // 截圖及控制方式，請根據專案實際情況修改
                 // 文件: https://maafw.xyz/docs/2.4-ControlMethods
                 "screencap": "PrintWindow", // 截圖方式
-                "mouse": "PostMessageWithCursorPos", // 滑鼠控制方式
-                "keyboard": "PostMessageWithCursorPos" // 鍵盤控制方式
+                "mouse": "Seize", // 滑鼠控制方式
+                "keyboard": "Seize" // 鍵盤控制方式
             }
         }
     ],
