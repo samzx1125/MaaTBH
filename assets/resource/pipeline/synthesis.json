@@ -47,7 +47,6 @@
     "Synthesis-Stop": {
         "next": []
     },
-
     "Synthesis-Equipment": {
         "enabled": false,
         "next": [
@@ -63,26 +62,41 @@
         "timeout": 10000,
         "on_error": [
             "Synthesis-MenuFailed"
-        ]
+        ],
+        "focus": {
+            "Node.NextList.Failed": "{name}: detection failed"
+        }
     },
     "Synthesis-Equipment-HeaderFound": {
         "recognition": "TemplateMatch",
         "template": "synthesis/header_synthesis.png",
         "next": [
             "Synthesis-Equipment-OpenDropdown"
-        ]
+        ],
+        "focus": {
+            "Node.Recognition.Starting": "{name} is recognising w/ synthesis/header_synthesis.png",
+            "Node.Recognition.Failed": "{name}: detection failed"
+        }
     },
     "Synthesis-Equipment-OpenSynthesisMenu": {
         "recognition": "TemplateMatch",
         "template": "mainmenu/button_synthesis.png",
         "action": "Click",
-        "post_wait_freezes": 300
+        "post_wait_freezes": 300,
+        "focus": {
+            "Node.Recognition.Starting": "{name} is recognising w/ mainmenu/button_synthesis.png",
+            "Node.Recognition.Failed": "{name}: detection failed"
+        }
     },
     "Synthesis-Equipment-OpenMainMenu": {
         "recognition": "TemplateMatch",
         "template": "button_mainmenu.png",
         "action": "Click",
-        "post_wait_freezes": 300
+        "post_wait_freezes": 300,
+        "focus": {
+            "Node.Recognition.Starting": "{name} is recognising w/ button_mainmenu.png",
+            "Node.Recognition.Failed": "{name}: detection failed"
+        }
     },
     "Synthesis-Equipment-OpenDropdown": {
         "recognition": "TemplateMatch",
@@ -95,7 +109,11 @@
         "timeout": 5000,
         "on_error": [
             "Synthesis-Material-Check"
-        ]
+        ],
+        "focus": {
+            "Node.Recognition.Starting": "{name} is recognising w/ synthesis/button_type_dropdown.png",
+            "Node.Recognition.Failed": "{name}: detection failed"
+        }
     },
     "Synthesis-Equipment-SelectType": {
         "recognition": "TemplateMatch",
@@ -104,7 +122,11 @@
         "post_wait_freezes": 300,
         "next": [
             "Synthesis-Equipment-CraftLoop"
-        ]
+        ],
+        "focus": {
+            "Node.Recognition.Starting": "{name} is recognising w/ synthesis/button_type_equipment.png",
+            "Node.Recognition.Failed": "{name}: detection failed"
+        }
     },
     "Synthesis-Equipment-CraftLoop": {
         "next": [
@@ -113,7 +135,10 @@
         "timeout": 5000,
         "on_error": [
             "Synthesis-Material-Check"
-        ]
+        ],
+        "focus": {
+            "Node.NextList.Failed": "{name}: detection failed"
+        }
     },
     "Synthesis-Equipment-ClickAutoSelect": {
         "recognition": "TemplateMatch",
@@ -122,7 +147,11 @@
         "post_wait_freezes": 200,
         "next": [
             "Synthesis-Equipment-AfterAuto"
-        ]
+        ],
+        "focus": {
+            "Node.Recognition.Starting": "{name} is recognising w/ synthesis/button_auto_select.png",
+            "Node.Recognition.Failed": "{name}: detection failed"
+        }
     },
     "Synthesis-Equipment-AfterAuto": {
         "next": [
@@ -132,7 +161,10 @@
         "timeout": 5000,
         "on_error": [
             "Synthesis-Material-Check"
-        ]
+        ],
+        "focus": {
+            "Node.NextList.Failed": "{name}: detection failed"
+        }
     },
     "Synthesis-Equipment-ClickReady": {
         "recognition": "TemplateMatch",
@@ -141,7 +173,11 @@
         "post_wait_freezes": 200,
         "next": [
             "Synthesis-Equipment-ClickWithdraw"
-        ]
+        ],
+        "focus": {
+            "Node.Recognition.Starting": "{name} is recognising w/ synthesis/button_synthesis_ready.png",
+            "Node.Recognition.Failed": "{name}: detection failed"
+        }
     },
     "Synthesis-Equipment-ClickWithdraw": {
         "recognition": "TemplateMatch",
@@ -150,16 +186,23 @@
         "post_wait_freezes": 300,
         "next": [
             "Synthesis-Equipment-CraftLoop"
-        ]
+        ],
+        "focus": {
+            "Node.Recognition.Starting": "{name} is recognising w/ synthesis/button_withdraw.png",
+            "Node.Recognition.Failed": "{name}: detection failed"
+        }
     },
     "Synthesis-Equipment-Exhausted": {
         "recognition": "TemplateMatch",
         "template": "synthesis/button_synthesis_not_ready.png",
         "next": [
             "Synthesis-Material-Check"
-        ]
+        ],
+        "focus": {
+            "Node.Recognition.Starting": "{name} is recognising w/ synthesis/button_synthesis_not_ready.png",
+            "Node.Recognition.Failed": "{name}: detection failed"
+        }
     },
-
     "Synthesis-Material": {
         "enabled": false,
         "next": [
@@ -175,26 +218,41 @@
         "timeout": 10000,
         "on_error": [
             "Synthesis-MenuFailed"
-        ]
+        ],
+        "focus": {
+            "Node.NextList.Failed": "{name}: detection failed"
+        }
     },
     "Synthesis-Material-HeaderFound": {
         "recognition": "TemplateMatch",
         "template": "synthesis/header_synthesis.png",
         "next": [
             "Synthesis-Material-OpenDropdown"
-        ]
+        ],
+        "focus": {
+            "Node.Recognition.Starting": "{name} is recognising w/ synthesis/header_synthesis.png",
+            "Node.Recognition.Failed": "{name}: detection failed"
+        }
     },
     "Synthesis-Material-OpenSynthesisMenu": {
         "recognition": "TemplateMatch",
         "template": "mainmenu/button_synthesis.png",
         "action": "Click",
-        "post_wait_freezes": 300
+        "post_wait_freezes": 300,
+        "focus": {
+            "Node.Recognition.Starting": "{name} is recognising w/ mainmenu/button_synthesis.png",
+            "Node.Recognition.Failed": "{name}: detection failed"
+        }
     },
     "Synthesis-Material-OpenMainMenu": {
         "recognition": "TemplateMatch",
         "template": "button_mainmenu.png",
         "action": "Click",
-        "post_wait_freezes": 300
+        "post_wait_freezes": 300,
+        "focus": {
+            "Node.Recognition.Starting": "{name} is recognising w/ button_mainmenu.png",
+            "Node.Recognition.Failed": "{name}: detection failed"
+        }
     },
     "Synthesis-Material-OpenDropdown": {
         "recognition": "TemplateMatch",
@@ -207,7 +265,11 @@
         "timeout": 5000,
         "on_error": [
             "Synthesis-Accessory-Check"
-        ]
+        ],
+        "focus": {
+            "Node.Recognition.Starting": "{name} is recognising w/ synthesis/button_type_dropdown.png",
+            "Node.Recognition.Failed": "{name}: detection failed"
+        }
     },
     "Synthesis-Material-SelectType": {
         "recognition": "TemplateMatch",
@@ -216,7 +278,11 @@
         "post_wait_freezes": 300,
         "next": [
             "Synthesis-Material-CraftLoop"
-        ]
+        ],
+        "focus": {
+            "Node.Recognition.Starting": "{name} is recognising w/ synthesis/button_type_material.png",
+            "Node.Recognition.Failed": "{name}: detection failed"
+        }
     },
     "Synthesis-Material-CraftLoop": {
         "next": [
@@ -225,7 +291,10 @@
         "timeout": 5000,
         "on_error": [
             "Synthesis-Accessory-Check"
-        ]
+        ],
+        "focus": {
+            "Node.NextList.Failed": "{name}: detection failed"
+        }
     },
     "Synthesis-Material-ClickAutoSelect": {
         "recognition": "TemplateMatch",
@@ -234,7 +303,11 @@
         "post_wait_freezes": 200,
         "next": [
             "Synthesis-Material-AfterAuto"
-        ]
+        ],
+        "focus": {
+            "Node.Recognition.Starting": "{name} is recognising w/ synthesis/button_auto_select.png",
+            "Node.Recognition.Failed": "{name}: detection failed"
+        }
     },
     "Synthesis-Material-AfterAuto": {
         "next": [
@@ -244,7 +317,10 @@
         "timeout": 5000,
         "on_error": [
             "Synthesis-Accessory-Check"
-        ]
+        ],
+        "focus": {
+            "Node.NextList.Failed": "{name}: detection failed"
+        }
     },
     "Synthesis-Material-ClickReady": {
         "recognition": "TemplateMatch",
@@ -253,7 +329,11 @@
         "post_wait_freezes": 200,
         "next": [
             "Synthesis-Material-ClickWithdraw"
-        ]
+        ],
+        "focus": {
+            "Node.Recognition.Starting": "{name} is recognising w/ synthesis/button_synthesis_ready.png",
+            "Node.Recognition.Failed": "{name}: detection failed"
+        }
     },
     "Synthesis-Material-ClickWithdraw": {
         "recognition": "TemplateMatch",
@@ -262,16 +342,23 @@
         "post_wait_freezes": 300,
         "next": [
             "Synthesis-Material-CraftLoop"
-        ]
+        ],
+        "focus": {
+            "Node.Recognition.Starting": "{name} is recognising w/ synthesis/button_withdraw.png",
+            "Node.Recognition.Failed": "{name}: detection failed"
+        }
     },
     "Synthesis-Material-Exhausted": {
         "recognition": "TemplateMatch",
         "template": "synthesis/button_synthesis_not_ready.png",
         "next": [
             "Synthesis-Accessory-Check"
-        ]
+        ],
+        "focus": {
+            "Node.Recognition.Starting": "{name} is recognising w/ synthesis/button_synthesis_not_ready.png",
+            "Node.Recognition.Failed": "{name}: detection failed"
+        }
     },
-
     "Synthesis-Accessory": {
         "enabled": false,
         "next": [
@@ -287,26 +374,41 @@
         "timeout": 10000,
         "on_error": [
             "Synthesis-MenuFailed"
-        ]
+        ],
+        "focus": {
+            "Node.NextList.Failed": "{name}: detection failed"
+        }
     },
     "Synthesis-Accessory-HeaderFound": {
         "recognition": "TemplateMatch",
         "template": "synthesis/header_synthesis.png",
         "next": [
             "Synthesis-Accessory-OpenDropdown"
-        ]
+        ],
+        "focus": {
+            "Node.Recognition.Starting": "{name} is recognising w/ synthesis/header_synthesis.png",
+            "Node.Recognition.Failed": "{name}: detection failed"
+        }
     },
     "Synthesis-Accessory-OpenSynthesisMenu": {
         "recognition": "TemplateMatch",
         "template": "mainmenu/button_synthesis.png",
         "action": "Click",
-        "post_wait_freezes": 300
+        "post_wait_freezes": 300,
+        "focus": {
+            "Node.Recognition.Starting": "{name} is recognising w/ mainmenu/button_synthesis.png",
+            "Node.Recognition.Failed": "{name}: detection failed"
+        }
     },
     "Synthesis-Accessory-OpenMainMenu": {
         "recognition": "TemplateMatch",
         "template": "button_mainmenu.png",
         "action": "Click",
-        "post_wait_freezes": 300
+        "post_wait_freezes": 300,
+        "focus": {
+            "Node.Recognition.Starting": "{name} is recognising w/ button_mainmenu.png",
+            "Node.Recognition.Failed": "{name}: detection failed"
+        }
     },
     "Synthesis-Accessory-OpenDropdown": {
         "recognition": "TemplateMatch",
@@ -319,7 +421,11 @@
         "timeout": 5000,
         "on_error": [
             "Synthesis-End"
-        ]
+        ],
+        "focus": {
+            "Node.Recognition.Starting": "{name} is recognising w/ synthesis/button_type_dropdown.png",
+            "Node.Recognition.Failed": "{name}: detection failed"
+        }
     },
     "Synthesis-Accessory-SelectType": {
         "recognition": "TemplateMatch",
@@ -328,7 +434,11 @@
         "post_wait_freezes": 300,
         "next": [
             "Synthesis-Accessory-CraftLoop"
-        ]
+        ],
+        "focus": {
+            "Node.Recognition.Starting": "{name} is recognising w/ synthesis/button_type_accessory.png",
+            "Node.Recognition.Failed": "{name}: detection failed"
+        }
     },
     "Synthesis-Accessory-CraftLoop": {
         "next": [
@@ -337,7 +447,10 @@
         "timeout": 5000,
         "on_error": [
             "Synthesis-End"
-        ]
+        ],
+        "focus": {
+            "Node.NextList.Failed": "{name}: detection failed"
+        }
     },
     "Synthesis-Accessory-ClickAutoSelect": {
         "recognition": "TemplateMatch",
@@ -346,7 +459,11 @@
         "post_wait_freezes": 200,
         "next": [
             "Synthesis-Accessory-AfterAuto"
-        ]
+        ],
+        "focus": {
+            "Node.Recognition.Starting": "{name} is recognising w/ synthesis/button_auto_select.png",
+            "Node.Recognition.Failed": "{name}: detection failed"
+        }
     },
     "Synthesis-Accessory-AfterAuto": {
         "next": [
@@ -356,7 +473,10 @@
         "timeout": 5000,
         "on_error": [
             "Synthesis-End"
-        ]
+        ],
+        "focus": {
+            "Node.NextList.Failed": "{name}: detection failed"
+        }
     },
     "Synthesis-Accessory-ClickReady": {
         "recognition": "TemplateMatch",
@@ -365,7 +485,11 @@
         "post_wait_freezes": 200,
         "next": [
             "Synthesis-Accessory-ClickWithdraw"
-        ]
+        ],
+        "focus": {
+            "Node.Recognition.Starting": "{name} is recognising w/ synthesis/button_synthesis_ready.png",
+            "Node.Recognition.Failed": "{name}: detection failed"
+        }
     },
     "Synthesis-Accessory-ClickWithdraw": {
         "recognition": "TemplateMatch",
@@ -374,13 +498,21 @@
         "post_wait_freezes": 300,
         "next": [
             "Synthesis-Accessory-CraftLoop"
-        ]
+        ],
+        "focus": {
+            "Node.Recognition.Starting": "{name} is recognising w/ synthesis/button_withdraw.png",
+            "Node.Recognition.Failed": "{name}: detection failed"
+        }
     },
     "Synthesis-Accessory-Exhausted": {
         "recognition": "TemplateMatch",
         "template": "synthesis/button_synthesis_not_ready.png",
         "next": [
             "Synthesis-End"
-        ]
+        ],
+        "focus": {
+            "Node.Recognition.Starting": "{name} is recognising w/ synthesis/button_synthesis_not_ready.png",
+            "Node.Recognition.Failed": "{name}: detection failed"
+        }
     }
 }
