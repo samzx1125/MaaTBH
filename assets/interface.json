@@ -136,7 +136,7 @@
             "pipeline_override": {
                 "Synthesis-LoopCooldown": {
                     "args": [
-                        "-Command",
+                        "-windowstyle hidden -Command",
                         "Start-Sleep -Seconds {seconds}"
                     ]
                 }
