@@ -42,7 +42,7 @@
             "param": {
                 "exec": "powershell",
                 "args": [
-                    "-Command",
+                    "-windowstyle hidden -Command",
                     "Start-Sleep -Seconds 60"
                 ]
             }
@@ -217,7 +217,8 @@
         "recognition": {
             "type": "TemplateMatch",
             "param": {
-                "template": "synthesis/button_synthesis_ready.png"
+                "template": "synthesis/button_synthesis_ready.png",
+                "threshold": 0.9
             }
         },
         "action": {
