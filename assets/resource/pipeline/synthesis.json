@@ -1,0 +1,379 @@
+{
+    "Synthesis": {
+        "next": [
+            "Synthesis-Equipment-Check"
+        ]
+    },
+    "Synthesis-Equipment-Check": {
+        "next": [
+            "Synthesis-Equipment",
+            "Synthesis-Material-Check"
+        ]
+    },
+    "Synthesis-Material-Check": {
+        "next": [
+            "Synthesis-Material",
+            "Synthesis-Accessory-Check"
+        ]
+    },
+    "Synthesis-Accessory-Check": {
+        "next": [
+            "Synthesis-Accessory",
+            "Synthesis-End"
+        ]
+    },
+    "Synthesis-MenuFailed": {
+        "action": "StopTask"
+    },
+    "Synthesis-End": {
+        "next": []
+    },
+
+    "Synthesis-Equipment": {
+        "enabled": false,
+        "next": [
+            "Synthesis-Equipment-EnsureMenu"
+        ]
+    },
+    "Synthesis-Equipment-EnsureMenu": {
+        "next": [
+            "Synthesis-Equipment-HeaderFound",
+            "[JumpBack]Synthesis-Equipment-OpenSynthesisMenu",
+            "[JumpBack]Synthesis-Equipment-OpenMainMenu"
+        ],
+        "timeout": 10000,
+        "on_error": [
+            "Synthesis-MenuFailed"
+        ]
+    },
+    "Synthesis-Equipment-HeaderFound": {
+        "recognition": "TemplateMatch",
+        "template": "synthesis/header_synthesis.png",
+        "next": [
+            "Synthesis-Equipment-OpenDropdown"
+        ]
+    },
+    "Synthesis-Equipment-OpenSynthesisMenu": {
+        "recognition": "TemplateMatch",
+        "template": "mainmenu/button_synthesis.png",
+        "action": "Click",
+        "post_wait_freezes": 300
+    },
+    "Synthesis-Equipment-OpenMainMenu": {
+        "recognition": "TemplateMatch",
+        "template": "button_mainmenu.png",
+        "action": "Click",
+        "post_wait_freezes": 300
+    },
+    "Synthesis-Equipment-OpenDropdown": {
+        "recognition": "TemplateMatch",
+        "template": "synthesis/button_type_dropdown.png",
+        "action": "Click",
+        "post_wait_freezes": 200,
+        "next": [
+            "Synthesis-Equipment-SelectType"
+        ],
+        "timeout": 5000,
+        "on_error": [
+            "Synthesis-Material-Check"
+        ]
+    },
+    "Synthesis-Equipment-SelectType": {
+        "recognition": "TemplateMatch",
+        "template": "synthesis/button_type_equipment.png",
+        "action": "Click",
+        "post_wait_freezes": 300,
+        "next": [
+            "Synthesis-Equipment-CraftLoop"
+        ]
+    },
+    "Synthesis-Equipment-CraftLoop": {
+        "next": [
+            "Synthesis-Equipment-ClickAutoSelect"
+        ],
+        "timeout": 5000,
+        "on_error": [
+            "Synthesis-Material-Check"
+        ]
+    },
+    "Synthesis-Equipment-ClickAutoSelect": {
+        "recognition": "TemplateMatch",
+        "template": "synthesis/button_auto_select.png",
+        "action": "Click",
+        "post_wait_freezes": 200,
+        "next": [
+            "Synthesis-Equipment-AfterAuto"
+        ]
+    },
+    "Synthesis-Equipment-AfterAuto": {
+        "next": [
+            "Synthesis-Equipment-ClickReady",
+            "Synthesis-Equipment-Exhausted"
+        ],
+        "timeout": 5000,
+        "on_error": [
+            "Synthesis-Material-Check"
+        ]
+    },
+    "Synthesis-Equipment-ClickReady": {
+        "recognition": "TemplateMatch",
+        "template": "synthesis/button_synthesis_ready.png",
+        "action": "Click",
+        "post_wait_freezes": 200,
+        "next": [
+            "Synthesis-Equipment-ClickWithdraw"
+        ]
+    },
+    "Synthesis-Equipment-ClickWithdraw": {
+        "recognition": "TemplateMatch",
+        "template": "synthesis/button_withdraw.png",
+        "action": "Click",
+        "post_wait_freezes": 300,
+        "next": [
+            "Synthesis-Equipment-CraftLoop"
+        ],
+        "timeout": 5000,
+        "on_error": [
+            "Synthesis-Equipment-CraftLoop"
+        ]
+    },
+    "Synthesis-Equipment-Exhausted": {
+        "recognition": "TemplateMatch",
+        "template": "synthesis/button_synthesis_not_ready.png",
+        "next": [
+            "Synthesis-Material-Check"
+        ]
+    },
+
+    "Synthesis-Material": {
+        "enabled": false,
+        "next": [
+            "Synthesis-Material-EnsureMenu"
+        ]
+    },
+    "Synthesis-Material-EnsureMenu": {
+        "next": [
+            "Synthesis-Material-HeaderFound",
+            "[JumpBack]Synthesis-Material-OpenSynthesisMenu",
+            "[JumpBack]Synthesis-Material-OpenMainMenu"
+        ],
+        "timeout": 10000,
+        "on_error": [
+            "Synthesis-MenuFailed"
+        ]
+    },
+    "Synthesis-Material-HeaderFound": {
+        "recognition": "TemplateMatch",
+        "template": "synthesis/header_synthesis.png",
+        "next": [
+            "Synthesis-Material-OpenDropdown"
+        ]
+    },
+    "Synthesis-Material-OpenSynthesisMenu": {
+        "recognition": "TemplateMatch",
+        "template": "mainmenu/button_synthesis.png",
+        "action": "Click",
+        "post_wait_freezes": 300
+    },
+    "Synthesis-Material-OpenMainMenu": {
+        "recognition": "TemplateMatch",
+        "template": "button_mainmenu.png",
+        "action": "Click",
+        "post_wait_freezes": 300
+    },
+    "Synthesis-Material-OpenDropdown": {
+        "recognition": "TemplateMatch",
+        "template": "synthesis/button_type_dropdown.png",
+        "action": "Click",
+        "post_wait_freezes": 200,
+        "next": [
+            "Synthesis-Material-SelectType"
+        ],
+        "timeout": 5000,
+        "on_error": [
+            "Synthesis-Accessory-Check"
+        ]
+    },
+    "Synthesis-Material-SelectType": {
+        "recognition": "TemplateMatch",
+        "template": "synthesis/button_type_material.png",
+        "action": "Click",
+        "post_wait_freezes": 300,
+        "next": [
+            "Synthesis-Material-CraftLoop"
+        ]
+    },
+    "Synthesis-Material-CraftLoop": {
+        "next": [
+            "Synthesis-Material-ClickAutoSelect"
+        ],
+        "timeout": 5000,
+        "on_error": [
+            "Synthesis-Accessory-Check"
+        ]
+    },
+    "Synthesis-Material-ClickAutoSelect": {
+        "recognition": "TemplateMatch",
+        "template": "synthesis/button_auto_select.png",
+        "action": "Click",
+        "post_wait_freezes": 200,
+        "next": [
+            "Synthesis-Material-AfterAuto"
+        ]
+    },
+    "Synthesis-Material-AfterAuto": {
+        "next": [
+            "Synthesis-Material-ClickReady",
+            "Synthesis-Material-Exhausted"
+        ],
+        "timeout": 5000,
+        "on_error": [
+            "Synthesis-Accessory-Check"
+        ]
+    },
+    "Synthesis-Material-ClickReady": {
+        "recognition": "TemplateMatch",
+        "template": "synthesis/button_synthesis_ready.png",
+        "action": "Click",
+        "post_wait_freezes": 200,
+        "next": [
+            "Synthesis-Material-ClickWithdraw"
+        ]
+    },
+    "Synthesis-Material-ClickWithdraw": {
+        "recognition": "TemplateMatch",
+        "template": "synthesis/button_withdraw.png",
+        "action": "Click",
+        "post_wait_freezes": 300,
+        "next": [
+            "Synthesis-Material-CraftLoop"
+        ],
+        "timeout": 5000,
+        "on_error": [
+            "Synthesis-Material-CraftLoop"
+        ]
+    },
+    "Synthesis-Material-Exhausted": {
+        "recognition": "TemplateMatch",
+        "template": "synthesis/button_synthesis_not_ready.png",
+        "next": [
+            "Synthesis-Accessory-Check"
+        ]
+    },
+
+    "Synthesis-Accessory": {
+        "enabled": false,
+        "next": [
+            "Synthesis-Accessory-EnsureMenu"
+        ]
+    },
+    "Synthesis-Accessory-EnsureMenu": {
+        "next": [
+            "Synthesis-Accessory-HeaderFound",
+            "[JumpBack]Synthesis-Accessory-OpenSynthesisMenu",
+            "[JumpBack]Synthesis-Accessory-OpenMainMenu"
+        ],
+        "timeout": 10000,
+        "on_error": [
+            "Synthesis-MenuFailed"
+        ]
+    },
+    "Synthesis-Accessory-HeaderFound": {
+        "recognition": "TemplateMatch",
+        "template": "synthesis/header_synthesis.png",
+        "next": [
+            "Synthesis-Accessory-OpenDropdown"
+        ]
+    },
+    "Synthesis-Accessory-OpenSynthesisMenu": {
+        "recognition": "TemplateMatch",
+        "template": "mainmenu/button_synthesis.png",
+        "action": "Click",
+        "post_wait_freezes": 300
+    },
+    "Synthesis-Accessory-OpenMainMenu": {
+        "recognition": "TemplateMatch",
+        "template": "button_mainmenu.png",
+        "action": "Click",
+        "post_wait_freezes": 300
+    },
+    "Synthesis-Accessory-OpenDropdown": {
+        "recognition": "TemplateMatch",
+        "template": "synthesis/button_type_dropdown.png",
+        "action": "Click",
+        "post_wait_freezes": 200,
+        "next": [
+            "Synthesis-Accessory-SelectType"
+        ],
+        "timeout": 5000,
+        "on_error": [
+            "Synthesis-End"
+        ]
+    },
+    "Synthesis-Accessory-SelectType": {
+        "recognition": "TemplateMatch",
+        "template": "synthesis/button_type_accessory.png",
+        "action": "Click",
+        "post_wait_freezes": 300,
+        "next": [
+            "Synthesis-Accessory-CraftLoop"
+        ]
+    },
+    "Synthesis-Accessory-CraftLoop": {
+        "next": [
+            "Synthesis-Accessory-ClickAutoSelect"
+        ],
+        "timeout": 5000,
+        "on_error": [
+            "Synthesis-End"
+        ]
+    },
+    "Synthesis-Accessory-ClickAutoSelect": {
+        "recognition": "TemplateMatch",
+        "template": "synthesis/button_auto_select.png",
+        "action": "Click",
+        "post_wait_freezes": 200,
+        "next": [
+            "Synthesis-Accessory-AfterAuto"
+        ]
+    },
+    "Synthesis-Accessory-AfterAuto": {
+        "next": [
+            "Synthesis-Accessory-ClickReady",
+            "Synthesis-Accessory-Exhausted"
+        ],
+        "timeout": 5000,
+        "on_error": [
+            "Synthesis-End"
+        ]
+    },
+    "Synthesis-Accessory-ClickReady": {
+        "recognition": "TemplateMatch",
+        "template": "synthesis/button_synthesis_ready.png",
+        "action": "Click",
+        "post_wait_freezes": 200,
+        "next": [
+            "Synthesis-Accessory-ClickWithdraw"
+        ]
+    },
+    "Synthesis-Accessory-ClickWithdraw": {
+        "recognition": "TemplateMatch",
+        "template": "synthesis/button_withdraw.png",
+        "action": "Click",
+        "post_wait_freezes": 300,
+        "next": [
+            "Synthesis-Accessory-CraftLoop"
+        ],
+        "timeout": 5000,
+        "on_error": [
+            "Synthesis-Accessory-CraftLoop"
+        ]
+    },
+    "Synthesis-Accessory-Exhausted": {
+        "recognition": "TemplateMatch",
+        "template": "synthesis/button_synthesis_not_ready.png",
+        "next": [
+            "Synthesis-End"
+        ]
+    }
+}
