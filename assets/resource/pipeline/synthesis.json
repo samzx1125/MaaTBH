@@ -258,7 +258,8 @@
         "recognition": {
             "type": "TemplateMatch",
             "param": {
-                "template": "synthesis/button_synthesis_not_ready.png"
+                "template": "synthesis/button_synthesis_not_ready.png",
+                "threshold": 0.9
             }
         },
         "next": [
@@ -342,7 +343,8 @@
         "recognition": {
             "type": "TemplateMatch",
             "param": {
-                "template": "synthesis/button_type_dropdown.png"
+                "template": "synthesis/button_type_dropdown.png",
+                "threshold": 0.9
             }
         },
         "action": {
@@ -431,7 +433,8 @@
         "recognition": {
             "type": "TemplateMatch",
             "param": {
-                "template": "synthesis/button_synthesis_ready.png"
+                "template": "synthesis/button_synthesis_ready.png",
+                "threshold": 0.9
             }
         },
         "action": {
@@ -472,7 +475,8 @@
         "recognition": {
             "type": "TemplateMatch",
             "param": {
-                "template": "synthesis/button_synthesis_not_ready.png"
+                "template": "synthesis/button_synthesis_not_ready.png",
+                "threshold": 0.9
             }
         },
         "next": [
@@ -556,7 +560,8 @@
         "recognition": {
             "type": "TemplateMatch",
             "param": {
-                "template": "synthesis/button_type_dropdown.png"
+                "template": "synthesis/button_type_dropdown.png",
+                "threshold": 0.9
             }
         },
         "action": {
@@ -645,7 +650,8 @@
         "recognition": {
             "type": "TemplateMatch",
             "param": {
-                "template": "synthesis/button_synthesis_ready.png"
+                "template": "synthesis/button_synthesis_ready.png",
+                "threshold": 0.9
             }
         },
         "action": {
@@ -686,7 +692,8 @@
         "recognition": {
             "type": "TemplateMatch",
             "param": {
-                "template": "synthesis/button_synthesis_not_ready.png"
+                "template": "synthesis/button_synthesis_not_ready.png",
+                "threshold": 0.9
             }
         },
         "next": [
