@@ -62,7 +62,7 @@
 
 5. 发布您的版本
 
-    本模板附带 GitHub Actions 工作流的 [配置文件](/.github/workflows/install.yml)，CI 检测到 tag 会自动进行打包和发布。默认的配置文件会将 [MFAAvalonia](https://github.com/SweetSmellFox/MFAAvalonia) 与你的项目一同打包和发版。
+    本模板附带 GitHub Actions 工作流的 [配置文件](/.github/workflows/install.yml)，CI 检测到 tag 会自动进行打包和发布。默认的配置文件会将 [MXU](https://github.com/MistEO/MXU) 与你的项目一同打包和发版，发布包中包含 `MaaTBH.exe`（基于 MXU 的 GUI）、`maafw/` 及项目资源文件。
 
     > [!NOTE]
     > 第一次操作前，需要**先**修改 GitHub 仓库设置 `Settings` - `Actions` - `General` - `Read and write permissions` - `Save`

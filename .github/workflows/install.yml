@@ -5,7 +5,7 @@ env:
   # - 設定 VERSION 為空字串時，下載 latest 版本
   # - 設定 VERSION 為具體版本號時（如 v1.2.3），下載指定版本
   MAAFW_VERSION: ""
-  MFAA_VERSION: ""
+  MXU_VERSION: ""
 
 on:
   push:
@@ -93,46 +93,45 @@ jobs:
           out-file-path: "deps"
           extract: true
 
-      - name: Download MFAAvalonia
+      - name: Download MXU
         if: matrix.os != 'android'
-        id: download_mfa
+        id: download_mxu
         uses: robinraju/release-downloader@v1
         with:
-          repository: SweetSmellFox/MFAAvalonia
-          fileName: "MFAAvalonia-*-${{ (matrix.os == 'win' && 'win') || (matrix.os == 'macos' && 'osx') || (matrix.os == 'linux' && 'linux') }}-${{ (matrix.arch == 'x86_64' && 'x64') || (matrix.arch == 'aarch64' && 'arm64') }}*"
-          latest: ${{ env.MFAA_VERSION == '' }}
-          tag: ${{ env.MFAA_VERSION }}
-          out-file-path: "MFA"
+          repository: MistEO/MXU
+          fileName: "MXU-${{ matrix.os }}-${{ matrix.arch }}*"
+          latest: ${{ env.MXU_VERSION == '' }}
+          tag: ${{ env.MXU_VERSION }}
+          out-file-path: "MXU"
           extract: true
 
-      - name: Clean up MFAAvalonia archive
+      - name: Clean up MXU archive
         if: matrix.os != 'android'
         shell: bash
         run: |
-          ARCHIVE_FILE_PATH="${{ fromJson(steps.download_mfa.outputs.downloaded_files)[0] }}"
+          ARCHIVE_FILE_PATH="${{ fromJson(steps.download_mxu.outputs.downloaded_files)[0] }}"
           rm -f "${ARCHIVE_FILE_PATH}"
-          echo "Archive cleanup command executed for MFAAvalonia."
+          echo "Archive cleanup command executed for MXU."
 
-      - name: Remove built-in runtime in MFA
-        if: matrix.os != 'android'
-        shell: bash
-        run: |
-          rm -rf MFA/runtimes
-      
       - name: Install
         shell: bash
         run: |
           if [[ "${{ matrix.os }}" != "android" ]]; then
-            if [ -d "MFA" ]; then
-              echo "Copying MFA files to install directory..."
+            if [ -d "MXU" ]; then
+              echo "Copying MXU binary to install directory..."
               mkdir -p install
-              rsync -av --ignore-existing MFA/ install/
-              echo "MFA files copied successfully."
+              if [ -f "MXU/mxu.exe" ]; then
+                cp MXU/mxu.exe install/MaaTBH.exe  # project executable name
+              elif [ -f "MXU/mxu" ]; then
+                cp MXU/mxu install/MaaTBH  # project executable name
+                chmod +x install/MaaTBH
+              fi
+              echo "MXU binary copied successfully."
             else
-              echo "MFA directory not found, skipping copy."
+              echo "MXU directory not found, skipping copy."
             fi
           else
-            echo "Skipping copy MFA for Android."
+            echo "Skipping copy MXU for Android."
           fi
 
           cd tools/
