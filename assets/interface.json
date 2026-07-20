@@ -1,38 +1,34 @@
 {
-    // 本文件主要定义了通用 UI 的行为和显示内容
-    // 可参考文档和示例添加更多您需要的功能
-    // 文档：https://maafw.xyz/docs/3.3-ProjectInterfaceV2
-    // 示例：https://github.com/MaaXYZ/MaaFramework/blob/main/sample/interface.json
+    // 本檔案主要定義了通用 UI 的行為和顯示內容
+    // 可參考文件和範例新增更多您需要的功能
+    // 文件：https://maafw.xyz/docs/3.3-ProjectInterfaceV2
+    // 範例：https://github.com/MaaXYZ/MaaFramework/blob/main/sample/interface.json
     "interface_version": 2,
     "name": "MaaTBH",
-    "description": "这是一个使用 MaaFramework 创建的新项目。",
+    "description": "這是一個使用 MaaFramework 建立的新專案。",
     "contact": "Email: samzx1125@gmail.com",
     "license": "MIT",
-    "welcome": "首次使用！欢迎使用 MAA!",
-    // 填写项目地址和版本号可实现自动更新功能
+    "welcome": "首次使用！歡迎使用 MAA!",
+    // 填寫專案地址和版本號可實現自動更新功能
     "github": "https://github.com/samzx1125/MaaTBH",
     "version": "0.0.1",
-    // Mirror酱为第三方分发服务，新项目默认关闭
-    // 若有需要请联系 Mirror酱 开通，直接自行开启是无法使用的
-    // "mirrorchyan_rid": "MaaXXX",
-    // "mirrorchyan_multiplatform": true,
     "controller": [
         //    {
         //        "name": "安卓端",
         //        "type": "Adb",
-        //        "display_short_side": 720 // 默认缩放分辨率的短边长度
+        //        "display_short_side": 720 // 預設縮放解析度的短邊長度
         //    },
         {
             "name": "桌面端",
             "type": "Win32",
             "win32": {
                 "class_regex": ".*",
-                "window_regex": "Visual Studio",
-                // 截图及控制方式，请根据项目实际情况修改
-                // 文档: https://maafw.xyz/docs/2.4-ControlMethods
-                "screencap": "PrintWindow", // 截图方式
-                "mouse": "PostMessageWithCursorPos", // 鼠标控制方式
-                "keyboard": "PostMessageWithCursorPos" // 键盘控制方式
+                "window_regex": "TaskBarHero",
+                // 截圖及控制方式，請根據專案實際情況修改
+                // 文件: https://maafw.xyz/docs/2.4-ControlMethods
+                "screencap": "PrintWindow", // 截圖方式
+                "mouse": "PostMessageWithCursorPos", // 滑鼠控制方式
+                "keyboard": "PostMessageWithCursorPos" // 鍵盤控制方式
             }
         }
     ],
@@ -48,26 +44,34 @@
         {
             "name": "合成",
             "entry": "Synthesis",
+            "default_check": true,
             "option": [
-                "SynthesisOptions"
+                "SynthesisOptions",
+                "InfiniteLoop",
+                "LoopCooldown"
             ]
         }
         // ,{
         //     "name": "收取盒子",
         //     "entry": "CollectChest",
         //     "option": [
-        //         "任务选项1"
+        //         "任務選項1"
         //     ]
         // }
     ],
     "option": {
         "SynthesisOptions": {
             "type": "checkbox",
-            "label": "合成类型",
+            "label": "合成類型",
+            "default_case": [
+                "option_synthesis_equipment_checkbox",
+                "option_synthesis_material_checkbox",
+                "option_synthesis_accessory_checkbox"
+            ],
             "cases": [
                 {
                     "name": "option_synthesis_equipment_checkbox",
-                    "label": "装备",
+                    "label": "裝備",
                     "pipeline_override": {
                         "Synthesis-Equipment": {
                             "enabled": true
@@ -85,7 +89,7 @@
                 },
                 {
                     "name": "option_synthesis_accessory_checkbox",
-                    "label": "饰品",
+                    "label": "飾品",
                     "pipeline_override": {
                         "Synthesis-Accessory": {
                             "enabled": true
@@ -93,6 +97,55 @@
                     }
                 }
             ]
+        },
+        "InfiniteLoop": {
+            "type": "switch",
+            "label": "無限循環",
+            "default_case": "No",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "開啟",
+                    "option": [
+                        "LoopCooldown"
+                    ],
+                    "pipeline_override": {
+                        "Synthesis-LoopCooldown": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "No",
+                    "label": "關閉",
+                    "pipeline_override": {
+                        "Synthesis-LoopCooldown": {
+                            "enabled": false
+                        }
+                    }
+                }
+            ]
+        },
+        "LoopCooldown": {
+            "type": "input",
+            "label": "循環冷卻時間（秒）",
+            "inputs": [
+                {
+                    "name": "seconds",
+                    "label": "秒",
+                    "default": "60",
+                    "pipeline_type": "int",
+                    "verify": "^\\d+$"
+                }
+            ],
+            "pipeline_override": {
+                "Synthesis-LoopCooldown": {
+                    "args": [
+                        "-Command",
+                        "Start-Sleep -Seconds {seconds}"
+                    ]
+                }
+            }
         }
     }
 }

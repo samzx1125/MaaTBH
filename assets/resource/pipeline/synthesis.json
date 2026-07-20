@@ -1,5 +1,6 @@
 {
     "Synthesis": {
+        "post_delay": 1000,
         "next": [
             "Synthesis-Equipment-Check"
         ]
@@ -26,6 +27,24 @@
         "action": "StopTask"
     },
     "Synthesis-End": {
+        "next": [
+            "Synthesis-LoopCooldown",
+            "Synthesis-Stop"
+        ]
+    },
+    "Synthesis-LoopCooldown": {
+        "enabled": false,
+        "action": "Command",
+        "exec": "powershell",
+        "args": [
+            "-Command",
+            "Start-Sleep -Seconds 60"
+        ],
+        "next": [
+            "Synthesis-Equipment-Check"
+        ]
+    },
+    "Synthesis-Stop": {
         "next": []
     },
 

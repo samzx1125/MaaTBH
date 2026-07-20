@@ -2,8 +2,8 @@ name: install
 
 env:
   # 版本控制：
-  # - 设置 VERSION 为空字符串时，下载 latest 版本
-  # - 设置 VERSION 为具体版本号时（如 v1.2.3），下载指定版本
+  # - 設定 VERSION 為空字串時，下載 latest 版本
+  # - 設定 VERSION 為具體版本號時（如 v1.2.3），下載指定版本
   MAAFW_VERSION: ""
   MFAA_VERSION: ""
 
@@ -35,7 +35,7 @@ jobs:
           fetch-depth: 0
       - id: set_tag
         run: |
-          # 检查标签格式
+          # 檢查標籤格式
           is_release=${{ startsWith(github.ref, 'refs/tags/v') }}
           tag=$(git describe --tags --match "v*" ${{ github.ref }} || true)
           if [[ $tag != v* ]]; then
@@ -52,7 +52,7 @@ jobs:
             tag="$prefix-ci.$suffix"
           fi
 
-          # 检查是否为预发布版本
+          # 檢查是否為預發布版本
           is_prerelease=false
           if [[ $tag =~ .*alpha.* || $tag =~ .*beta.* || $tag =~ .*rc.* || $tag =~ .*dev.* || $tag =~ .*-ci.* ]]; then
             is_prerelease=true
@@ -142,7 +142,7 @@ jobs:
 
       - uses: actions/upload-artifact@v4
         with:
-          name: MaaXXX-${{ matrix.os }}-${{ matrix.arch }}
+          name: MaaTBH-${{ matrix.os }}-${{ matrix.arch }}
           path: "install"
 
   changelog:
@@ -162,8 +162,8 @@ jobs:
         id: git-cliff
         with:
           config: .github/cliff.toml
-          # 正式版：使用 tag-pattern 只匹配正式版标签，包含所有从上一个正式版以来的提交
-          # 预发布版：正常生成，只包含从上一个标签以来的提交
+          # 正式版：使用 tag-pattern 只匹配正式版標籤，包含所有從上一個正式版以來的提交
+          # 預發布版：正常產生，只包含從上一個標籤以來的提交
           args: >-
             -vv --latest --strip header
             ${{ needs.meta.outputs.is_prerelease == 'false' && '--tag-pattern "^v[0-9]+\\.[0-9]+\\.[0-9]+$"' || '' }}
@@ -193,16 +193,3 @@ jobs:
           body: ${{ needs.changelog.outputs.release_body }}
           draft: false
           prerelease: ${{ needs.meta.outputs.is_prerelease == 'true' }}
-
-        # Mirror酱为第三方分发服务，新项目默认关闭
-        # 若有需要请联系 Mirror酱 开通，直接自行开启是无法使用的
-        # https://mirrorchyan.com/
-      - name: Trigger MirrorChyanUploading
-        if: false
-        # if: ${{ github.repository_owner == 'MaaXYZ' }}
-        shell: bash
-        run: |
-          gh workflow run --repo $GITHUB_REPOSITORY mirrorchyan_release.yml -f tag=${{ needs.meta.outputs.tag }}
-          gh workflow run --repo $GITHUB_REPOSITORY mirrorchyan_release_note.yml -f tag=${{ needs.meta.outputs.tag }}
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
