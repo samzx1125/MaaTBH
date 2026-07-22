@@ -55,7 +55,8 @@
         "recognition": {
             "type": "TemplateMatch",
             "param": {
-                "template": "stash/button_to_stash.png"
+                "template": "stash/button_to_stash.png",
+                "threshold": 0.95
             }
         },
         "action": {
