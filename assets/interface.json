@@ -42,6 +42,7 @@
             "default_check": true,
             "option": [
                 "SynthesisOptions",
+                "ToStash",
                 "InfiniteLoop",
                 "LoopCooldown"
             ]
@@ -93,6 +94,31 @@
                 }
             ]
         },
+        "ToStash": {
+            "type": "switch",
+            "label": "合成後放入倉庫",
+            "default_case": "No",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "開啟",
+                    "pipeline_override": {
+                        "Synthesis-ClickToStash": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "No",
+                    "label": "關閉",
+                    "pipeline_override": {
+                        "Synthesis-ClickToStash": {
+                            "enabled": false
+                        }
+                    }
+                }
+            ]
+        },
         "InfiniteLoop": {
             "type": "switch",
             "label": "無限循環",
@@ -135,10 +161,17 @@
             ],
             "pipeline_override": {
                 "Synthesis-LoopCooldown": {
-                    "args": [
-                        "-windowstyle hidden -Command",
-                        "Start-Sleep -Seconds {seconds}"
-                    ]
+                    "action": {
+                        "param": {
+                            "args": [
+                                "-NoProfile",
+                                "-WindowStyle",
+                                "Hidden",
+                                "-Command",
+                                "Start-Sleep -Seconds {seconds}"
+                            ]
+                        }
+                    }
                 }
             }
         }

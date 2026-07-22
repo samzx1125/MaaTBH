@@ -2,6 +2,26 @@
     "Synthesis": {
         "post_delay": 1000,
         "next": [
+            "Synthesis-FocusWindow"
+        ],
+        "timeout": 5000,
+        "on_error": [
+            "Synthesis-Equipment-Check"
+        ]
+    },
+    "Synthesis-FocusWindow": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "template": "synthesis/header_cube.png"
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {}
+        },
+        "post_wait_freezes": 200,
+        "next": [
             "Synthesis-Equipment-Check"
         ]
     },
@@ -23,13 +43,34 @@
             "Synthesis-End"
         ]
     },
-    "Synthesis-MenuFailed": {
-        "action": {
-            "type": "StopTask",
-            "param": {}
-        }
-    },
     "Synthesis-End": {
+        "next": [
+            "Synthesis-ClickToStash",
+            "Synthesis-AfterStash"
+        ],
+        "timeout": 5000,
+        "on_error": [
+            "Synthesis-AfterStash"
+        ]
+    },
+    "Synthesis-ClickToStash": {
+        "enabled": false,
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "template": "stash/button_to_stash.png"
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {}
+        },
+        "post_wait_freezes": 300,
+        "next": [
+            "Synthesis-AfterStash"
+        ]
+    },
+    "Synthesis-AfterStash": {
         "next": [
             "Synthesis-LoopCooldown",
             "Synthesis-Stop"
@@ -42,13 +83,16 @@
             "param": {
                 "exec": "powershell",
                 "args": [
-                    "-windowstyle hidden -Command",
+                    "-NoProfile",
+                    "-WindowStyle",
+                    "Hidden",
+                    "-Command",
                     "Start-Sleep -Seconds 60"
                 ]
             }
         },
         "next": [
-            "Synthesis-Equipment-Check"
+            "Synthesis-FocusWindow"
         ]
     },
     "Synthesis-Stop": {
@@ -58,7 +102,10 @@
         "enabled": false,
         "next": [
             "Synthesis-Equipment-EnsureMenu"
-        ]
+        ],
+        "focus": {
+            "Node.PipelineNode.Starting": "starting to synthesis equipment"
+        }
     },
     "Synthesis-Equipment-EnsureMenu": {
         "next": [
@@ -68,11 +115,8 @@
         ],
         "timeout": 10000,
         "on_error": [
-            "Synthesis-MenuFailed"
-        ],
-        "focus": {
-            "Node.NextList.Failed": "{name}: detection failed"
-        }
+            "Synthesis-Equipment-Finish"
+        ]
     },
     "Synthesis-Equipment-HeaderFound": {
         "recognition": {
@@ -83,11 +127,7 @@
         },
         "next": [
             "Synthesis-Equipment-OpenDropdown"
-        ],
-        "focus": {
-            "Node.Recognition.Starting": "{name} is recognising w/ synthesis/header_synthesis.png",
-            "Node.Recognition.Failed": "{name}: detection failed"
-        }
+        ]
     },
     "Synthesis-Equipment-OpenSynthesisMenu": {
         "recognition": {
@@ -100,11 +140,7 @@
             "type": "Click",
             "param": {}
         },
-        "post_wait_freezes": 300,
-        "focus": {
-            "Node.Recognition.Starting": "{name} is recognising w/ mainmenu/button_synthesis.png",
-            "Node.Recognition.Failed": "{name}: detection failed"
-        }
+        "post_wait_freezes": 300
     },
     "Synthesis-Equipment-OpenMainMenu": {
         "recognition": {
@@ -117,11 +153,7 @@
             "type": "Click",
             "param": {}
         },
-        "post_wait_freezes": 300,
-        "focus": {
-            "Node.Recognition.Starting": "{name} is recognising w/ button_mainmenu.png",
-            "Node.Recognition.Failed": "{name}: detection failed"
-        }
+        "post_wait_freezes": 300
     },
     "Synthesis-Equipment-OpenDropdown": {
         "recognition": {
@@ -141,12 +173,8 @@
         ],
         "timeout": 5000,
         "on_error": [
-            "Synthesis-Material-Check"
-        ],
-        "focus": {
-            "Node.Recognition.Starting": "{name} is recognising w/ synthesis/button_type_dropdown.png",
-            "Node.Recognition.Failed": "{name}: detection failed"
-        }
+            "Synthesis-Equipment-Finish"
+        ]
     },
     "Synthesis-Equipment-SelectType": {
         "recognition": {
@@ -162,11 +190,7 @@
         "post_wait_freezes": 300,
         "next": [
             "Synthesis-Equipment-CraftLoop"
-        ],
-        "focus": {
-            "Node.Recognition.Starting": "{name} is recognising w/ synthesis/button_type_equipment.png",
-            "Node.Recognition.Failed": "{name}: detection failed"
-        }
+        ]
     },
     "Synthesis-Equipment-CraftLoop": {
         "next": [
@@ -174,11 +198,8 @@
         ],
         "timeout": 5000,
         "on_error": [
-            "Synthesis-Material-Check"
-        ],
-        "focus": {
-            "Node.NextList.Failed": "{name}: detection failed"
-        }
+            "Synthesis-Equipment-Finish"
+        ]
     },
     "Synthesis-Equipment-ClickAutoSelect": {
         "recognition": {
@@ -194,11 +215,7 @@
         "post_wait_freezes": 200,
         "next": [
             "Synthesis-Equipment-AfterAuto"
-        ],
-        "focus": {
-            "Node.Recognition.Starting": "{name} is recognising w/ synthesis/button_auto_select.png",
-            "Node.Recognition.Failed": "{name}: detection failed"
-        }
+        ]
     },
     "Synthesis-Equipment-AfterAuto": {
         "next": [
@@ -207,11 +224,8 @@
         ],
         "timeout": 5000,
         "on_error": [
-            "Synthesis-Material-Check"
-        ],
-        "focus": {
-            "Node.NextList.Failed": "{name}: detection failed"
-        }
+            "Synthesis-Equipment-Finish"
+        ]
     },
     "Synthesis-Equipment-ClickReady": {
         "recognition": {
@@ -228,11 +242,7 @@
         "post_wait_freezes": 200,
         "next": [
             "Synthesis-Equipment-ClickWithdraw"
-        ],
-        "focus": {
-            "Node.Recognition.Starting": "{name} is recognising w/ synthesis/button_synthesis_ready.png",
-            "Node.Recognition.Failed": "{name}: detection failed"
-        }
+        ]
     },
     "Synthesis-Equipment-ClickWithdraw": {
         "recognition": {
@@ -249,10 +259,6 @@
         "next": [
             "Synthesis-Equipment-CraftLoop"
         ],
-        "focus": {
-            "Node.Recognition.Starting": "{name} is recognising w/ synthesis/button_withdraw.png",
-            "Node.Recognition.Failed": "{name}: detection failed"
-        },
         "pre_delay": 2000
     },
     "Synthesis-Equipment-Exhausted": {
@@ -264,18 +270,25 @@
             }
         },
         "next": [
-            "Synthesis-Material-Check"
-        ],
+            "Synthesis-Equipment-Finish"
+        ]
+    },
+    "Synthesis-Equipment-Finish": {
         "focus": {
-            "Node.Recognition.Starting": "{name} is recognising w/ synthesis/button_synthesis_not_ready.png",
-            "Node.Recognition.Failed": "{name}: detection failed"
-        }
+            "Node.PipelineNode.Starting": "ending synthesis equipment"
+        },
+        "next": [
+            "Synthesis-Material-Check"
+        ]
     },
     "Synthesis-Material": {
         "enabled": false,
         "next": [
             "Synthesis-Material-EnsureMenu"
-        ]
+        ],
+        "focus": {
+            "Node.PipelineNode.Starting": "starting to synthesis material"
+        }
     },
     "Synthesis-Material-EnsureMenu": {
         "next": [
@@ -285,11 +298,8 @@
         ],
         "timeout": 10000,
         "on_error": [
-            "Synthesis-MenuFailed"
-        ],
-        "focus": {
-            "Node.NextList.Failed": "{name}: detection failed"
-        }
+            "Synthesis-Material-Finish"
+        ]
     },
     "Synthesis-Material-HeaderFound": {
         "recognition": {
@@ -300,11 +310,7 @@
         },
         "next": [
             "Synthesis-Material-OpenDropdown"
-        ],
-        "focus": {
-            "Node.Recognition.Starting": "{name} is recognising w/ synthesis/header_synthesis.png",
-            "Node.Recognition.Failed": "{name}: detection failed"
-        }
+        ]
     },
     "Synthesis-Material-OpenSynthesisMenu": {
         "recognition": {
@@ -317,11 +323,7 @@
             "type": "Click",
             "param": {}
         },
-        "post_wait_freezes": 300,
-        "focus": {
-            "Node.Recognition.Starting": "{name} is recognising w/ mainmenu/button_synthesis.png",
-            "Node.Recognition.Failed": "{name}: detection failed"
-        }
+        "post_wait_freezes": 300
     },
     "Synthesis-Material-OpenMainMenu": {
         "recognition": {
@@ -334,11 +336,7 @@
             "type": "Click",
             "param": {}
         },
-        "post_wait_freezes": 300,
-        "focus": {
-            "Node.Recognition.Starting": "{name} is recognising w/ button_mainmenu.png",
-            "Node.Recognition.Failed": "{name}: detection failed"
-        }
+        "post_wait_freezes": 300
     },
     "Synthesis-Material-OpenDropdown": {
         "recognition": {
@@ -358,12 +356,8 @@
         ],
         "timeout": 5000,
         "on_error": [
-            "Synthesis-Accessory-Check"
-        ],
-        "focus": {
-            "Node.Recognition.Starting": "{name} is recognising w/ synthesis/button_type_dropdown.png",
-            "Node.Recognition.Failed": "{name}: detection failed"
-        }
+            "Synthesis-Material-Finish"
+        ]
     },
     "Synthesis-Material-SelectType": {
         "recognition": {
@@ -379,11 +373,7 @@
         "post_wait_freezes": 300,
         "next": [
             "Synthesis-Material-CraftLoop"
-        ],
-        "focus": {
-            "Node.Recognition.Starting": "{name} is recognising w/ synthesis/button_type_material.png",
-            "Node.Recognition.Failed": "{name}: detection failed"
-        }
+        ]
     },
     "Synthesis-Material-CraftLoop": {
         "next": [
@@ -391,11 +381,8 @@
         ],
         "timeout": 5000,
         "on_error": [
-            "Synthesis-Accessory-Check"
-        ],
-        "focus": {
-            "Node.NextList.Failed": "{name}: detection failed"
-        }
+            "Synthesis-Material-Finish"
+        ]
     },
     "Synthesis-Material-ClickAutoSelect": {
         "recognition": {
@@ -411,11 +398,7 @@
         "post_wait_freezes": 200,
         "next": [
             "Synthesis-Material-AfterAuto"
-        ],
-        "focus": {
-            "Node.Recognition.Starting": "{name} is recognising w/ synthesis/button_auto_select.png",
-            "Node.Recognition.Failed": "{name}: detection failed"
-        }
+        ]
     },
     "Synthesis-Material-AfterAuto": {
         "next": [
@@ -424,11 +407,8 @@
         ],
         "timeout": 5000,
         "on_error": [
-            "Synthesis-Accessory-Check"
-        ],
-        "focus": {
-            "Node.NextList.Failed": "{name}: detection failed"
-        }
+            "Synthesis-Material-Finish"
+        ]
     },
     "Synthesis-Material-ClickReady": {
         "recognition": {
@@ -445,11 +425,7 @@
         "post_wait_freezes": 200,
         "next": [
             "Synthesis-Material-ClickWithdraw"
-        ],
-        "focus": {
-            "Node.Recognition.Starting": "{name} is recognising w/ synthesis/button_synthesis_ready.png",
-            "Node.Recognition.Failed": "{name}: detection failed"
-        }
+        ]
     },
     "Synthesis-Material-ClickWithdraw": {
         "recognition": {
@@ -466,10 +442,6 @@
         "next": [
             "Synthesis-Material-CraftLoop"
         ],
-        "focus": {
-            "Node.Recognition.Starting": "{name} is recognising w/ synthesis/button_withdraw.png",
-            "Node.Recognition.Failed": "{name}: detection failed"
-        },
         "pre_delay": 2000
     },
     "Synthesis-Material-Exhausted": {
@@ -481,18 +453,25 @@
             }
         },
         "next": [
-            "Synthesis-Accessory-Check"
-        ],
+            "Synthesis-Material-Finish"
+        ]
+    },
+    "Synthesis-Material-Finish": {
         "focus": {
-            "Node.Recognition.Starting": "{name} is recognising w/ synthesis/button_synthesis_not_ready.png",
-            "Node.Recognition.Failed": "{name}: detection failed"
-        }
+            "Node.PipelineNode.Starting": "ending synthesis material"
+        },
+        "next": [
+            "Synthesis-Accessory-Check"
+        ]
     },
     "Synthesis-Accessory": {
         "enabled": false,
         "next": [
             "Synthesis-Accessory-EnsureMenu"
-        ]
+        ],
+        "focus": {
+            "Node.PipelineNode.Starting": "starting to synthesis accessory"
+        }
     },
     "Synthesis-Accessory-EnsureMenu": {
         "next": [
@@ -502,11 +481,8 @@
         ],
         "timeout": 10000,
         "on_error": [
-            "Synthesis-MenuFailed"
-        ],
-        "focus": {
-            "Node.NextList.Failed": "{name}: detection failed"
-        }
+            "Synthesis-Accessory-Finish"
+        ]
     },
     "Synthesis-Accessory-HeaderFound": {
         "recognition": {
@@ -517,11 +493,7 @@
         },
         "next": [
             "Synthesis-Accessory-OpenDropdown"
-        ],
-        "focus": {
-            "Node.Recognition.Starting": "{name} is recognising w/ synthesis/header_synthesis.png",
-            "Node.Recognition.Failed": "{name}: detection failed"
-        }
+        ]
     },
     "Synthesis-Accessory-OpenSynthesisMenu": {
         "recognition": {
@@ -534,11 +506,7 @@
             "type": "Click",
             "param": {}
         },
-        "post_wait_freezes": 300,
-        "focus": {
-            "Node.Recognition.Starting": "{name} is recognising w/ mainmenu/button_synthesis.png",
-            "Node.Recognition.Failed": "{name}: detection failed"
-        }
+        "post_wait_freezes": 300
     },
     "Synthesis-Accessory-OpenMainMenu": {
         "recognition": {
@@ -551,11 +519,7 @@
             "type": "Click",
             "param": {}
         },
-        "post_wait_freezes": 300,
-        "focus": {
-            "Node.Recognition.Starting": "{name} is recognising w/ button_mainmenu.png",
-            "Node.Recognition.Failed": "{name}: detection failed"
-        }
+        "post_wait_freezes": 300
     },
     "Synthesis-Accessory-OpenDropdown": {
         "recognition": {
@@ -575,12 +539,8 @@
         ],
         "timeout": 5000,
         "on_error": [
-            "Synthesis-End"
-        ],
-        "focus": {
-            "Node.Recognition.Starting": "{name} is recognising w/ synthesis/button_type_dropdown.png",
-            "Node.Recognition.Failed": "{name}: detection failed"
-        }
+            "Synthesis-Accessory-Finish"
+        ]
     },
     "Synthesis-Accessory-SelectType": {
         "recognition": {
@@ -596,11 +556,7 @@
         "post_wait_freezes": 300,
         "next": [
             "Synthesis-Accessory-CraftLoop"
-        ],
-        "focus": {
-            "Node.Recognition.Starting": "{name} is recognising w/ synthesis/button_type_accessory.png",
-            "Node.Recognition.Failed": "{name}: detection failed"
-        }
+        ]
     },
     "Synthesis-Accessory-CraftLoop": {
         "next": [
@@ -608,11 +564,8 @@
         ],
         "timeout": 5000,
         "on_error": [
-            "Synthesis-End"
-        ],
-        "focus": {
-            "Node.NextList.Failed": "{name}: detection failed"
-        }
+            "Synthesis-Accessory-Finish"
+        ]
     },
     "Synthesis-Accessory-ClickAutoSelect": {
         "recognition": {
@@ -628,11 +581,7 @@
         "post_wait_freezes": 200,
         "next": [
             "Synthesis-Accessory-AfterAuto"
-        ],
-        "focus": {
-            "Node.Recognition.Starting": "{name} is recognising w/ synthesis/button_auto_select.png",
-            "Node.Recognition.Failed": "{name}: detection failed"
-        }
+        ]
     },
     "Synthesis-Accessory-AfterAuto": {
         "next": [
@@ -641,11 +590,8 @@
         ],
         "timeout": 5000,
         "on_error": [
-            "Synthesis-End"
-        ],
-        "focus": {
-            "Node.NextList.Failed": "{name}: detection failed"
-        }
+            "Synthesis-Accessory-Finish"
+        ]
     },
     "Synthesis-Accessory-ClickReady": {
         "recognition": {
@@ -662,11 +608,7 @@
         "post_wait_freezes": 200,
         "next": [
             "Synthesis-Accessory-ClickWithdraw"
-        ],
-        "focus": {
-            "Node.Recognition.Starting": "{name} is recognising w/ synthesis/button_synthesis_ready.png",
-            "Node.Recognition.Failed": "{name}: detection failed"
-        }
+        ]
     },
     "Synthesis-Accessory-ClickWithdraw": {
         "recognition": {
@@ -683,10 +625,6 @@
         "next": [
             "Synthesis-Accessory-CraftLoop"
         ],
-        "focus": {
-            "Node.Recognition.Starting": "{name} is recognising w/ synthesis/button_withdraw.png",
-            "Node.Recognition.Failed": "{name}: detection failed"
-        },
         "pre_delay": 2000
     },
     "Synthesis-Accessory-Exhausted": {
@@ -698,11 +636,15 @@
             }
         },
         "next": [
-            "Synthesis-End"
-        ],
+            "Synthesis-Accessory-Finish"
+        ]
+    },
+    "Synthesis-Accessory-Finish": {
         "focus": {
-            "Node.Recognition.Starting": "{name} is recognising w/ synthesis/button_synthesis_not_ready.png",
-            "Node.Recognition.Failed": "{name}: detection failed"
-        }
+            "Node.PipelineNode.Starting": "ending synthesis accessory"
+        },
+        "next": [
+            "Synthesis-End"
+        ]
     }
 }
