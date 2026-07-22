@@ -48,10 +48,7 @@
             "Synthesis-ClickToStash",
             "Synthesis-AfterStash"
         ],
-        "timeout": 5000,
-        "on_error": [
-            "Synthesis-AfterStash"
-        ]
+        "timeout": 5000
     },
     "Synthesis-ClickToStash": {
         "enabled": false,
