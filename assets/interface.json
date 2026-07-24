@@ -43,6 +43,7 @@
             "option": [
                 "SynthesisOptions",
                 "ToStash",
+                "AutoCollectSpaceBar",
                 "InfiniteLoop",
                 "LoopCooldown"
             ]
@@ -119,6 +120,31 @@
                 }
             ]
         },
+        "AutoCollectSpaceBar": {
+            "type": "switch",
+            "label": "Auto collect using space bar",
+            "default_case": "Yes",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "開啟",
+                    "pipeline_override": {
+                        "Synthesis-FocusWindow-Space": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "No",
+                    "label": "關閉",
+                    "pipeline_override": {
+                        "Synthesis-FocusWindow-Space": {
+                            "enabled": false
+                        }
+                    }
+                }
+            ]
+        },
         "InfiniteLoop": {
             "type": "switch",
             "label": "無限循環",
@@ -149,12 +175,19 @@
         },
         "LoopCooldown": {
             "type": "input",
-            "label": "循環冷卻時間（秒）",
+            "label": "循環冷卻時間（秒，隨機區間）",
             "inputs": [
                 {
-                    "name": "seconds",
-                    "label": "秒",
-                    "default": "60",
+                    "name": "min_seconds",
+                    "label": "最短（秒）",
+                    "default": "240",
+                    "pipeline_type": "int",
+                    "verify": "^\\d+$"
+                },
+                {
+                    "name": "max_seconds",
+                    "label": "最長（秒）",
+                    "default": "360",
                     "pipeline_type": "int",
                     "verify": "^\\d+$"
                 }
@@ -168,7 +201,7 @@
                                 "-WindowStyle",
                                 "Hidden",
                                 "-Command",
-                                "Start-Sleep -Seconds {seconds}"
+                                "Start-Sleep -Seconds (Get-Random -Minimum {min_seconds} -Maximum ({max_seconds}+1))"
                             ]
                         }
                     }

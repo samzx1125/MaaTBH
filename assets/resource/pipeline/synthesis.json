@@ -22,6 +22,19 @@
         },
         "post_wait_freezes": 200,
         "next": [
+            "Synthesis-FocusWindow-Space",
+            "Synthesis-Equipment-Check"
+        ]
+    },
+    "Synthesis-FocusWindow-Space": {
+        "enabled": true,
+        "action": {
+            "type": "ClickKey",
+            "param": {
+                "key": 32
+            }
+        },
+        "next": [
             "Synthesis-Equipment-Check"
         ]
     },
@@ -85,7 +98,7 @@
                     "-WindowStyle",
                     "Hidden",
                     "-Command",
-                    "Start-Sleep -Seconds 60"
+                    "Start-Sleep -Seconds (Get-Random -Minimum 240 -Maximum 361)"
                 ]
             }
         },
